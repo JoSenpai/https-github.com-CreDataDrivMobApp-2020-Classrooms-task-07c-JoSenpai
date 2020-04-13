@@ -1,0 +1,20 @@
+PODS:
+  - Alamofire (4.9.1)
+  - PocketSVG (2.5.0)
+
+DEPENDENCIES:
+  - Alamofire
+  - PocketSVG
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - PocketSVG
+
+SPEC CHECKSUMS:
+  Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
+  PocketSVG: 9d9c4bc8e7d8dbbc208bd21e5c92814fd3c6c34d
+
+PODFILE CHECKSUM: 01aa108e66acc435f21144371a7ed9d465a52f7a
+
+COCOAPODS: 1.8.4
