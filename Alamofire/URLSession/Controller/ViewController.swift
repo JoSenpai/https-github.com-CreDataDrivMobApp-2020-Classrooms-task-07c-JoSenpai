@@ -10,6 +10,13 @@ import UIKit
 import Alamofire
 import JavaScriptCore
 
+struct Connectivity {
+  static let sharedInstance = NetworkReachabilityManager()!
+  static var isConnectedToInternet:Bool {
+      return self.sharedInstance.isReachable
+    }
+}
+
 class ViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
@@ -18,6 +25,17 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if Connectivity.isConnectedToInternet {
+             print("Connected")
+         } else {
+            let alert = UIAlertController(title: "No Internet Connection", message: "Please turn on your network.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+
+            self.present(alert, animated: true)
+             print("No Internet")
+        }
+        
         // Do any additional setup after loading the view.
 //        fetchURL(url: "https://restcountries.eu/rest/v2/all")
         getCountryData(url: "https://restcountries.eu/rest/v2/all")
@@ -47,7 +65,6 @@ class ViewController: UIViewController {
     
     func getCountryData(url: String) {
         let request = Alamofire.request(url).validate()
-        
         request.responseJSON { response in
             guard let data = response.data else {
                 print("No Data")
@@ -64,10 +81,8 @@ class ViewController: UIViewController {
                 }
            } catch {
                 print(error)
-            
            }
         }
-        
     }
 
     func fetchURL(url: String) {
@@ -94,8 +109,6 @@ class ViewController: UIViewController {
             task.resume()
         }
     }
-    
-    
 }
 
 extension ViewController: UITableViewDataSource {
